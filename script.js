@@ -5,13 +5,7 @@ let isNumber = function(n) {
 }
 
 
-let money 
-let income = 'Фриланс';
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-let deposit = confirm('У тебя есть депозит в банке?');
-let mission = 1000000000000000;
-let period = 6;
-
+let money;
 let start = function() {
     money = prompt('Ваш месячный доход?');
 
@@ -22,15 +16,69 @@ let start = function() {
 
 start();
 
-let showTypeof = function(data) {
-    console.log(typeof data);
+
+let appData = {
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses: [],
+    deposit: false,
+    mission: 50000,
+    period: 3,
+    budget: money,
+    budgetDay: 0,
+    budgetMonth: 0,
+    ExpensesMonth: 0,
+    asking: function() {
+        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+            appData.addExpenses = addExpenses.toLowerCase().split(',');
+            appData.deposit = confirm('У тебя есть депозит в банке?');
+    }
+
+};
+appData.asking();
+
+appData.getExpensesMonth = function() {
+    let sum = 0;
+
+    for (let i = 0; i < 2; i++) {
+
+        if (i === 0) {
+            expenses1 = prompt('Введете обязательную статью расходов?', "Садик Государственынй");
+        } else if (i === 1) {
+            expenses2 = prompt('Введете обязательную статью расходов?', "Садик Частный");
+        }
+
+        sum += +prompt('Во сколько это обойдется?');
+    }
+    console.log(sum);
+    return sum;
 };
 
-showTypeof(money);
-showTypeof(income);
-showTypeof(deposit);
+appData.getAccumulatedMonth = function(){
+    return money - expenseAmount;
+};
 
-console.log(income.length);
+appData.getTargetMonth =  function() {
+    return mission / accumulatedMonth
+};
+
+appData.getStatusIncome = function() {
+    if (budgetDay > 1200) {
+        return ('У вас высокий уровень дохода!');
+        } else if (budgetDay > 600) {
+            return ('У вас средний уровень дохода!');
+        } else if (budgetDay > 0) {
+            return ('К сожалению у вас уровень дохода ниже среднего');
+        } else if (budgetDay < 0) {
+            return ('Что-то пошло не так');
+        }
+};
+
+console.log(appData);
+
+
+
 
 //let expenses1 = prompt('Введете обязательную статью расходов?');
 //let expense1Amount = prompt('Во сколько это обойдется?','1200');
@@ -40,7 +88,6 @@ console.log(income.length);
 let expenses1, expenses2;
 
 
-console.log(addExpenses.toLowerCase().split(','));
 
 
 let getExpensesMonth = function() {
