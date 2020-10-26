@@ -1,5 +1,6 @@
 'use strict';
 
+
 let money,
     start = function() {
         do {
@@ -102,5 +103,6 @@ for (let key in appData) {
 
 appData.getInfoDeposit();
 console.log(appData.persentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
+
 
 
