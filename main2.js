@@ -1,9 +1,9 @@
 'use strict'
 
 const start = document.querySelector('#start');
-const btn1 = document.querySelector('button');
-const btn2 = document.getElementsByClassName('btn_plus expenses_add');
-const expensesPlus = document.querySelector('.btn_plus income_add');
+const btnPlus = document.querySelectorAll('button');
+const incomePlus = btnPlus[0];
+const expensesPlus = btnPlus[1];
 const salaryAmount = document.querySelector('.salary-amount');
 const income = document.querySelectorAll('.additional_income-item');
 const one = document.getElementsByClassName('result-total budget_month-value');
@@ -12,13 +12,13 @@ const one2 = document.getElementsByClassName('result-total additional_income-val
 const one3 = document.getElementsByClassName('result-total additional_expenses-value');
 const one4 = document.getElementsByClassName('result-total income_period-value');
 const one5 = document.getElementsByClassName('result-total target_month-value');
-const two = document.querySelector('.expenses-amount');
+let expensesItems = document.querySelectorAll('.expenses-items');
 const two1 = document.querySelector('.expenses-title');
 
 
 console.log(start);
-console.log(btn1);
-console.log(btn2[0]);
+console.log(btnPlus);
+console.log(btnPlus[1]);
 console.log(income[0]);
 console.log(income[1]);
 console.log(one[0]);
@@ -27,7 +27,6 @@ console.log(one2[0]);
 console.log(one3[0]);
 console.log(one4[0]);
 console.log(one5[0]);
-console.log(two);
 console.log(two1);
 
 
@@ -55,17 +54,31 @@ let appData = {
             return; 
         }
         appData.budget = salaryAmount.value
-        console.log('salaryAmount.value', salaryAmount.value);
+        appData.getExpenses();
         
-        //appData.asking();
-        //appData.getExpensesMonth();
-        //appData.getBudget();
+
+        appData.getExpensesMonth();
+        appData.getBudget();
     },
 
     addExpensesBlock: function() {
-        let expensesItem = document.querySelector('.expenses-items');
-        console.log(expensesItem.parentNode);
+        let cloneExpensesItem = expensesItems[0].cloneNode(true);
+        expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
+        expensesItems = document.querySelectorAll('.expenses-items');
         
+        if (expensesItems.lenght === 3) {
+            expensesPlus.style.display = 'none';
+        }
+    },
+    getExpenses: function() {
+        expensesItems.forEach(function(item){
+            let itemExpenses = item.querySelector('.expenses-title').value;
+            let cashExpenses = item.querySelector('.expenses-amount').value;
+            if(itemExpenses !== '' && cashExpenses !== ''){
+                appData.expenses[itemExpenses] = cashExpenses;
+            }
+            
+        });
     },
 
     asking: function() {
@@ -79,17 +92,7 @@ let appData = {
         let addExpenses = prompt('Перечислете возможные расходы через запятую?');
         appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
-        for (let i = 0; i < 2; i++) {
-            let itemExpenses = prompt('Введите обязательную статью расходов?', "Садик государственный");
-            let cashExpenses;
-            do {
-                cashExpenses = prompt('Во сколько это обойдется?', 2500);
-            }
-            while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
-
-            appData.expenses[itemExpenses] = cashExpenses;
-
-        }
+        
     },
     getExpensesMonth: function() {
         for (let key in appData.expenses) {
@@ -131,11 +134,11 @@ expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
 
 
-if (appData.getTargetMonth() > 0) {
-    console.log("Цель будет достигнута за " + Math.ceil(appData.getTargetMonth()) + 'месяца');
-} else {
-    console.log('Цель не будет достигнута');
-}
+//if (appData.getTargetMonth() > 0) {
+//    console.log("Цель будет достигнута за " + Math.ceil(appData.getTargetMonth()) + 'месяца');
+//} else {
+//    console.log('Цель не будет достигнута');
+//}
 
 
 for (let key in appData) {
