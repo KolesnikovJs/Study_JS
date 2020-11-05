@@ -17,6 +17,9 @@ const one5 = document.getElementsByClassName('result-total target_month-value');
 let expensesItems = document.querySelectorAll('.expenses-items');
 const two1 = document.querySelector('.expenses-title');
 const additionalExpensesItem = document.querySelector('.additional_expenses-item');
+const targetAmount = document.querySelector('.target-amount');
+const TargetMonthValue = document.querySelector('.result-total target_month-value');
+
 
 
 console.log(start);
@@ -49,7 +52,6 @@ let appData = {
     deposit: false,
     persentDeposit: 0,
     moneyDeposit: 0,
-    mission: 50000,
     period: 3,
     start: function() {
         if(salaryAmount.value === '') {
@@ -72,6 +74,7 @@ let appData = {
         ExpensesMonthValue.value = appData.expensesMonth;
         additionalExpensesValue.value = appData.addExpenses.join(', ');
         additionalIncomeValue.value = appData.addIncome.join(', ');
+        TargetMonthValue.value = Math.ceil(appData.getTargetMonth());
     },
 
     addExpensesBlock: function() {
@@ -134,7 +137,7 @@ let appData = {
         appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function() {
-        return appData.mission / appData.budgetMonth;
+        return targetAmount.value / appData.budgetMonth;
     },
     getStatusIncome: function() {
         if (appData.budgetDay > 800) {
