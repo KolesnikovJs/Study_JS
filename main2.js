@@ -19,6 +19,7 @@ const two1 = document.querySelector('.expenses-title');
 const additionalExpensesItem = document.querySelector('.additional_expenses-item');
 const targetAmount = document.querySelector('.target-amount');
 const TargetMonthValue = document.querySelector('.result-total target_month-value');
+const periodSelect = document.querySelector('.period-select');
 
 
 
@@ -75,6 +76,7 @@ let appData = {
         additionalExpensesValue.value = appData.addExpenses.join(', ');
         additionalIncomeValue.value = appData.addIncome.join(', ');
         TargetMonthValue.value = Math.ceil(appData.getTargetMonth());
+        incomePeriodValue.value = appData.calcPeriod();
     },
 
     addExpensesBlock: function() {
@@ -149,6 +151,10 @@ let appData = {
         } else {
             return ('Что-то пошло не так');
         }
+
+    },
+    calcPeriod: function() {
+        return appData.budgetMonth * periodSelect.value;
     },
     getInfoDeposit: function() {
         if (appData.deposit) {
