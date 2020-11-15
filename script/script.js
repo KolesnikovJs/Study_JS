@@ -40,6 +40,47 @@ window.addEventListener('DOMContentLoaded', function() {
      
  }
 
-    countTimer('15 november 2020');
+    countTimer('15 december 2020');
 
 });
+
+//menu
+
+const toogleMenu = () => {
+    const btnMenu = document.querySelector('.menu');
+    const menu = document.querySelector('menu');
+    const closeBtn = document.querySelector('.close-btn');
+    const menuItems = menu.querySelectorAll('ul>li');
+
+    const handlerMenu = () => {
+        menu.classList.toggle('active-menu');
+    };
+
+    btnMenu.addEventListener('click', handlerMenu); 
+
+    closeBtn.addEventListener('click', handlerMenu);
+
+    menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+};
+
+toogleMenu();
+
+//popup
+
+const togglePopUp = () => {
+    const popup = document.querySelector('.popup');
+    const popupBtn = document.querySelectorAll('.popup-btn');
+    const popUpClose = document.querySelector('.popup-close');
+
+    popupBtn.forEach((elem) => {
+        elem.addEventListener('click', () => {
+            popup.style.display = 'block';
+        });
+    });
+
+    popUpClose.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+};
+
+togglePopUp();
