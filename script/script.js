@@ -78,8 +78,19 @@ const togglePopUp = () => {
         });
     });
 
-    popUpClose.addEventListener('click', () => {
-        popup.style.display = 'none';
+
+
+    popup.addEventListener('click', () => {
+        let target = event.target;
+
+        if(target.classList.contains('popup-close')) {
+            popup.style.display = 'none';
+        }
+        target = target.closest('.popup-content');
+
+        if(!target) {
+            popup.style.display = 'none';
+        }
     });
 };
 
