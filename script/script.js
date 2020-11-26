@@ -141,6 +141,20 @@ const calc = (price = 100) => {
     const calcCount = document.querySelector('.calc-count');
     const totalValue = document.getElementById('total');
 
+    const countSum = () => {
+        let total = 0;
+        const typeValue = calcType.options[calcType.selectedIndex].value;
+        const squareValue = +calcSquare.value;
+
+        if (typeValue && squareValue) {
+            total = price * typeValue * squareValue;
+        } else {
+            total = 0;
+        }
+
+        totalValue.textContent = total;
+    };
+
     calcBlock.addEventListener('change', (event) => {
         const target = event.target;
         if (target.matches('.calc-type') || target.matches('.calc-square') || target.matches('.calc-day') || target.matches('.calc-count')){
