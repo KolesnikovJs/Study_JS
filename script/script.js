@@ -129,3 +129,28 @@ const tabs = () => {
 };
 
 tabs();
+
+//калькулятор
+
+const calc = (price = 100) => {
+
+    const calcBlock = document.querySelector('.calc-block');
+    const calcType = document.querySelector('.calc-type');
+    const  calcSquare = document.querySelector('.calc-square');
+    const calcDay = document.querySelector('.calc-day');
+    const calcCount = document.querySelector('.calc-count');
+    const totalValue = document.getElementById('total');
+
+    calcBlock.addEventListener('change', (event) => {
+        const target = event.target;
+        if (target.matches('.calc-type') || target.matches('.calc-square') || target.matches('.calc-day') || target.matches('.calc-count')){
+           countSum();
+            
+        }
+    });
+
+
+
+
+}
+calc(100);
